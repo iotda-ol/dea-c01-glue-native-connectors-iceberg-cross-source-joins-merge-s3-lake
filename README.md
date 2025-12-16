@@ -1,0 +1,2 @@
+# dea-c01-glue-native-connectors-iceberg-cross-source-joins-merge-s3-lake
+This repository implements a low-operational-overhead data pipeline that aggregates data from Amazon Redshift, Teradata Vantage, and Google BigQuery into an Amazon S3 data lake using Apache Iceberg. AWS Glue native connectors and transforms are used to join data and perform Iceberg MERGE operations following DEA-C01 best practices.
