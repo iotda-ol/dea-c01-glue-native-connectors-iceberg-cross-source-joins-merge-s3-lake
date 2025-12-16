@@ -1,6 +1,6 @@
 # Multi-Source Data Integration Pipeline with AWS Glue and Apache Iceberg
 
-![AWS](https://img.shields.io/badge/AWS-Glue-orange) ![Terraform](https://img.shields.io/badge/IaC-Terraform-purple) ![Python](https://img.shields.io/badge/Python-3.9+-blue) ![Iceberg](https://img.shields.io/badge/Apache-Iceberg-blue)
+![AWS](https://img.shields.io/badge/AWS-Glue-orange) ![Terraform](https://img.shields.io/badge/IaC-Terraform-purple) ![Python](https://img.shields.io/badge/Python-3.9+-blue) ![Iceberg](https://img.shields.io/badge/Apache-Iceberg-blue) ![Security](https://img.shields.io/badge/Security-Reviewed-green)
 
 This repository implements a production-ready, multi-source data integration pipeline that aggregates data from **Amazon Redshift**, **Teradata Vantage**, and **Google BigQuery** into an **Amazon S3 data lake** using **Apache Iceberg** table format. The solution uses **AWS Glue native connectors** for optimal performance, applies cross-source transformations and joins, and implements **MERGE operations** for efficient upserts.
 
@@ -213,6 +213,7 @@ See [DEA-C01-BEST-PRACTICES.md](docs/DEA-C01-BEST-PRACTICES.md) for detailed exp
 - [**ARCHITECTURE.md**](docs/ARCHITECTURE.md) - Detailed architecture and design decisions
 - [**DEA-C01-BEST-PRACTICES.md**](docs/DEA-C01-BEST-PRACTICES.md) - AWS certification best practices
 - [**DEPLOYMENT.md**](docs/DEPLOYMENT.md) - Step-by-step deployment guide
+- [**SECURITY.md**](SECURITY.md) - Security policy and best practices
 
 ## 🔍 Testing
 

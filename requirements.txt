@@ -5,8 +5,9 @@
 boto3>=1.34.0
 botocore>=1.34.0
 
-# PySpark (same version as Glue 4.0)
-pyspark==3.3.0
+# PySpark (updated to patched version for security)
+# Note: AWS Glue 4.0 uses PySpark 3.3.0, but for local dev we use 3.3.3+ for security
+pyspark>=3.3.3
 
 # AWS Glue libraries (for local testing)
 # Note: Some Glue libraries are not available via pip
