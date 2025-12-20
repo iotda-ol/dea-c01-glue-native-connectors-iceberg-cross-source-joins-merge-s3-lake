@@ -1,0 +1,66 @@
+# Pipeline Configuration
+
+pipeline:
+  name: cross-source-data-pipeline
+  description: Data pipeline aggregating Redshift, Teradata, and BigQuery into Iceberg
+  
+# Source configurations
+sources:
+  redshift:
+    enabled: true
+    tables:
+      - customers
+      - orders
+      - products
+    incremental: true
+    watermark_column: updated_at
+    
+  teradata:
+    enabled: true
+    tables:
+      - transactions
+      - inventory
+    incremental: true
+    watermark_column: last_modified
+    partition_column: transaction_date
+    
+  bigquery:
+    enabled: true
+    datasets:
+      - analytics.user_events
+      - analytics.pageviews
+    incremental: true
+    watermark_column: event_timestamp
+
+# Transformation settings
+transformations:
+  enable_validation: true
+  enable_masking: true
+  pii_columns:
+    - email
+    - phone_number
+    - ssn
+    - credit_card
+
+# Target Iceberg configuration  
+target:
+  warehouse_path: s3://your-datalake-bucket/warehouse/
+  catalog_name: datalake_db
+  table_name: merged_data
+  partition_by:
+    - year(event_timestamp)
+    - month(event_timestamp)
+  merge_keys:
+    - customer_id
+    - transaction_id
+    
+# Job settings
+job_settings:
+  max_concurrent_runs: 1
+  timeout_minutes: 120
+  worker_type: G.1X
+  number_of_workers: 10
+  glue_version: "4.0"
+  enable_job_bookmark: true
+  enable_metrics: true
+  enable_spark_ui: true

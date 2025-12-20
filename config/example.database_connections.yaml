@@ -1,0 +1,27 @@
+# Example Database Connections Configuration
+# Copy this to database_connections.yaml and update with your actual values
+
+connections:
+  redshift:
+    type: redshift
+    host: your-redshift-cluster.region.redshift.amazonaws.com
+    port: 5439
+    database: your_database
+    secret_arn: arn:aws:secretsmanager:region:account:secret:redshift-credentials
+    role_arn: arn:aws:iam::account:role/GlueJobRole
+    temp_dir: s3://your-glue-temp-bucket/redshift/
+    
+  teradata:
+    type: teradata
+    host: your-teradata-host.com
+    database: your_database
+    connection_name: teradata-glue-connection
+    secret_arn: arn:aws:secretsmanager:region:account:secret:teradata-credentials
+    num_partitions: 10
+    
+  bigquery:
+    type: bigquery
+    project_id: your-gcp-project-id
+    dataset: your_dataset
+    credentials_path: s3://your-bucket/credentials/bigquery-key.json
+    temp_gcs_bucket: your-temp-gcs-bucket
