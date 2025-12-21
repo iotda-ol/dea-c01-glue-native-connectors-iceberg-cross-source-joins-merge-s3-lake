@@ -1,3 +1,4 @@
+# Build artifacts and dependencies
 # Terraform
 **/.terraform/*
 *.tfstate
@@ -35,6 +36,23 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
 venv/
 ENV/
 env/
@@ -70,6 +88,13 @@ spark-warehouse/
 *.log
 logs/
 
+# Secrets and credentials
+*.pem
+*.key
+*-key.json
+secrets/
+.env
+
 # Temporary files
 tmp/
 temp/
@@ -94,6 +119,21 @@ node_modules/
 htmlcov/
 .pytest_cache/
 
+# Jupyter
+.ipynb_checkpoints/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# AWS
+.aws/
+
+# Package archives
+*.zip
+*.tar.gz
 # Documentation build
 docs/_build/
 *.tmp
