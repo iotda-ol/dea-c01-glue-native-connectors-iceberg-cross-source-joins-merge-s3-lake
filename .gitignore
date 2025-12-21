@@ -1,4 +1,21 @@
 # Build artifacts and dependencies
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+.terraform.lock.hcl
+
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -10,6 +27,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+lib/
 lib64/
 parts/
 sdist/
@@ -35,6 +53,36 @@ env/
 # OS
 .DS_Store
 Thumbs.db
+venv/
+ENV/
+env/
+
+# IDEs
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# AWS
+.aws/
+*.pem
+
+# Glue
+metastore_db/
+derby.log
+spark-warehouse/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
 
 # Logs
 *.log
@@ -51,7 +99,20 @@ secrets/
 tmp/
 temp/
 *.tmp
-*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Configuration (sensitive)
+**/secrets.yaml
+**/credentials.json
+**/.env.local
+
+# Build artifacts
+*.jar
+*.zip
+node_modules/
 
 # Test coverage
 .coverage
@@ -73,3 +134,8 @@ htmlcov/
 # Package archives
 *.zip
 *.tar.gz
+# Documentation build
+docs/_build/
+*.tmp
+tmp/
+temp/
