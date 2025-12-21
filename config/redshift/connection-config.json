@@ -1,0 +1,24 @@
+{
+  "connection_name": "redshift-production",
+  "database": "glue_catalog_db",
+  "temp_dir": "s3://aws-glue-temp-bucket/redshift-temp/",
+  "jdbc_options": {
+    "url": "jdbc:redshift://redshift-cluster.region.redshift.amazonaws.com:5439/database",
+    "user": "admin",
+    "password": "${SECRET:redshift/credentials}",
+    "ssl": true,
+    "sslMode": "require"
+  },
+  "read_options": {
+    "numPartitions": 10,
+    "partitionColumn": "id",
+    "lowerBound": 1,
+    "upperBound": 1000000,
+    "fetchSize": 10000
+  },
+  "optimization": {
+    "enable_pushdown": true,
+    "enable_unload": true,
+    "parallel_read": true
+  }
+}

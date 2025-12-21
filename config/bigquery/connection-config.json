@@ -1,0 +1,23 @@
+{
+  "project_id": "my-gcp-project",
+  "credentials_path": "s3://my-secrets-bucket/bigquery-service-account.json",
+  "temp_bucket": "my-gcs-temp-bucket",
+  "dataset": "analytics",
+  "read_options": {
+    "viewsEnabled": true,
+    "materializationDataset": "temp_dataset",
+    "materializationProject": "my-gcp-project",
+    "maxParallelism": 10,
+    "preferredMinParallelism": 5
+  },
+  "spark_options": {
+    "spark.sql.catalog.bigquery": "com.google.cloud.spark.bigquery.v2.BigQueryCatalog",
+    "credentialsFile": "${SECRET:bigquery/service-account}",
+    "parentProject": "my-gcp-project"
+  },
+  "optimization": {
+    "enable_filter_pushdown": true,
+    "enable_column_pruning": true,
+    "cache_expiration_minutes": 60
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "connection_name": "teradata-production",
+  "database": "prod_db",
+  "jdbc_driver": "com.teradata.jdbc.TeraDriver",
+  "jdbc_options": {
+    "url": "jdbc:teradata://teradata-host/DATABASE=prod_db",
+    "user": "etl_user",
+    "password": "${SECRET:teradata/credentials}",
+    "CHARSET": "UTF8",
+    "TYPE": "FASTEXPORT",
+    "SESSIONS": "8"
+  },
+  "read_options": {
+    "fetchSize": 10000,
+    "queryBand": "ApplicationName=GlueETL;",
+    "numPartitions": 8
+  },
+  "optimization": {
+    "enable_fastexport": true,
+    "enable_pushdown": true,
+    "parallel_sessions": 8
+  }
+}

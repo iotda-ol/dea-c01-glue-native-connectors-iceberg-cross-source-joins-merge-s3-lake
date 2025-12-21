@@ -1,0 +1,51 @@
+# General Configuration
+aws_region   = "us-east-1"
+environment  = "dev"
+project_name = "multi-source-pipeline"
+
+# S3 Configuration (must be globally unique)
+data_lake_bucket_name    = "my-company-data-lake-dev-12345"
+glue_scripts_bucket_name = "my-company-glue-scripts-dev-12345"
+
+# Network Configuration (required for JDBC connections)
+# If using VPC for database connections, uncomment and configure:
+# availability_zone   = "us-east-1a"
+# subnet_id           = "subnet-xxxxxxxxxxxxx"
+# security_group_ids  = ["sg-xxxxxxxxxxxxx"]
+
+# Redshift Configuration
+enable_redshift_connection = true
+redshift_jdbc_url          = "jdbc:redshift://my-redshift-cluster.region.redshift.amazonaws.com:5439/mydb"
+redshift_username          = "admin"
+redshift_password          = "MySecurePassword123!"  # Use AWS Secrets Manager in production
+redshift_source_table      = "public.sales_data"
+
+# Teradata Configuration
+enable_teradata_connection = true
+teradata_jdbc_url          = "jdbc:teradata://teradata-host.example.com/DATABASE=PROD"
+teradata_username          = "tduser"
+teradata_password          = "MySecurePassword456!"  # Use AWS Secrets Manager in production
+teradata_source_table      = "PROD.CUSTOMER_DATA"
+
+# BigQuery Configuration
+enable_bigquery_connection  = true
+bigquery_jdbc_url           = "jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=my-gcp-project;"
+bigquery_secret_id          = "multi-source-pipeline/bigquery/credentials"
+bigquery_connector_s3_path  = "s3://my-company-glue-scripts-dev-12345/connectors/GoogleBigQueryJDBC.jar"
+bigquery_source_table       = "my-gcp-project.my_dataset.product_data"
+
+# Glue Job Configuration
+glue_version              = "4.0"
+worker_type               = "G.2X"
+number_of_workers         = 10
+job_timeout_minutes       = 2880
+max_concurrent_runs       = 1
+job_bookmark_option       = "job-bookmark-enable"
+job_duration_threshold_seconds = 7200
+
+# Iceberg Configuration
+iceberg_database_name = "iceberg_db"
+iceberg_table_name    = "integrated_data"
+
+# Logging Configuration
+log_retention_days = 7
