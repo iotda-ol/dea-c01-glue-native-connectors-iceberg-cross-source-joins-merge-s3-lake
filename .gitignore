@@ -36,6 +36,10 @@ wheels/
 .installed.cfg
 *.egg
 venv/
+ENV/
+env/
+
+# IDEs
 env/
 ENV/
 
@@ -51,11 +55,47 @@ ENV/
 .aws/
 *.pem
 
+# Glue
+metastore_db/
+derby.log
+spark-warehouse/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
 # Logs
 *.log
 logs/
 
 # Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Configuration (sensitive)
+**/secrets.yaml
+**/credentials.json
+**/.env.local
+
+# Build artifacts
+*.jar
+*.zip
+node_modules/
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Documentation build
+docs/_build/
 *.tmp
 tmp/
 temp/
