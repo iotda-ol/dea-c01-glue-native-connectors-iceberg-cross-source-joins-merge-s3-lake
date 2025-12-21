@@ -1,3 +1,19 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+.terraform.lock.hcl
+
 # Python
 __pycache__/
 *.py[cod]
@@ -24,6 +40,10 @@ ENV/
 env/
 
 # IDEs
+env/
+ENV/
+
+# IDE
 .vscode/
 .idea/
 *.swp
@@ -76,3 +96,6 @@ htmlcov/
 
 # Documentation build
 docs/_build/
+*.tmp
+tmp/
+temp/
