@@ -1,0 +1,38 @@
+# Join Configuration
+
+joins:
+  # First join: Redshift customers with Teradata transactions
+  - name: customer_transactions
+    left_source: redshift
+    left_table: customers
+    right_source: teradata
+    right_table: transactions
+    join_type: inner
+    join_keys:
+      - customer_id
+    select_columns:
+      left:
+        - customer_id
+        - customer_name
+        - email
+        - region
+      right:
+        - transaction_id
+        - transaction_date
+        - amount
+        - status
+        
+  # Second join: Result with BigQuery user events
+  - name: customer_events
+    left_source: result  # Result from previous join
+    right_source: bigquery
+    right_table: analytics.user_events
+    join_type: left
+    join_keys:
+      - customer_id
+    select_columns:
+      right:
+        - event_type
+        - event_timestamp
+        - page_url
+        - session_id

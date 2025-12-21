@@ -1,0 +1,43 @@
+# Iceberg Table Configuration
+
+iceberg:
+  # Table properties
+  properties:
+    write.format.default: parquet
+    write.parquet.compression-codec: snappy
+    write.metadata.compression-codec: gzip
+    write.target-file-size-bytes: 536870912  # 512MB
+    
+  # Partitioning
+  partition_spec:
+    - name: event_year
+      transform: year
+      source_column: event_timestamp
+    - name: event_month
+      transform: month
+      source_column: event_timestamp
+    - name: customer_bucket
+      transform: bucket[16]
+      source_column: customer_id
+      
+  # Schema evolution
+  schema_evolution:
+    allow_add_columns: true
+    allow_drop_columns: false
+    allow_rename_columns: true
+    
+  # Compaction settings
+  compaction:
+    enabled: true
+    target_file_size_mb: 512
+    min_file_count: 10
+    
+  # Snapshot retention
+  snapshot_retention:
+    min_snapshots_to_keep: 5
+    max_snapshot_age_days: 7
+    
+  # Time travel
+  time_travel:
+    enabled: true
+    max_history_days: 30

@@ -1,8 +1,16 @@
+# Terraform Variables Definition
+
 # General Configuration
 variable "aws_region" {
   description = "AWS region for resources"
   type        = string
   default     = "us-east-1"
+}
+
+variable "project_name" {
+  description = "Project name for resource naming"
+  type        = string
+  default     = "datalake"
 }
 
 variable "environment" {
@@ -11,6 +19,42 @@ variable "environment" {
   default     = "dev"
 }
 
+variable "common_tags" {
+  description = "Common tags to apply to all resources"
+  type        = map(string)
+  default = {
+    Project     = "DataLake"
+    ManagedBy   = "Terraform"
+  }
+}
+
+# Networking Variables
+variable "vpc_cidr" {
+  description = "CIDR block for VPC"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "availability_zones" {
+  description = "List of availability zones"
+  type        = list(string)
+  default     = ["us-east-1a", "us-east-1b"]
+}
+
+variable "private_subnets" {
+  description = "List of private subnet CIDR blocks"
+  type        = list(string)
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
+variable "public_subnets" {
+  description = "List of public subnet CIDR blocks"
+  type        = list(string)
+  default     = ["10.0.101.0/24", "10.0.102.0/24"]
+}
+
+variable "enable_nat_gateway" {
+  description = "Enable NAT gateway for private subnets"
 variable "project_name" {
   description = "Project name used for resource naming"
   type        = string
@@ -54,6 +98,15 @@ variable "enable_redshift_connection" {
   default     = true
 }
 
+variable "enable_vpn_gateway" {
+  description = "Enable VPN gateway"
+  type        = bool
+  default     = false
+}
+
+# S3 Variables
+variable "enable_versioning" {
+  description = "Enable S3 bucket versioning"
 variable "redshift_jdbc_url" {
   description = "Redshift JDBC connection URL"
   type        = string
@@ -87,6 +140,8 @@ variable "enable_teradata_connection" {
   default     = true
 }
 
+variable "enable_encryption" {
+  description = "Enable S3 bucket encryption"
 variable "teradata_jdbc_url" {
   description = "Teradata JDBC connection URL"
   type        = string
@@ -120,6 +175,36 @@ variable "enable_bigquery_connection" {
   default     = true
 }
 
+variable "lifecycle_rules" {
+  description = "S3 lifecycle rules"
+  type = list(object({
+    id      = string
+    enabled = bool
+    prefix  = string
+    days    = number
+    storage_class = string
+  }))
+  default = [
+    {
+      id      = "archive-old-data"
+      enabled = true
+      prefix  = "raw/"
+      days    = 90
+      storage_class = "GLACIER"
+    }
+  ]
+}
+
+# Glue Variables
+variable "glue_database_name" {
+  description = "Name of Glue catalog database"
+  type        = string
+  default     = "datalake_db"
+}
+
+# Monitoring Variables
+variable "alert_email" {
+  description = "Email address for alerts"
 variable "bigquery_jdbc_url" {
   description = "BigQuery JDBC connection URL"
   type        = string
@@ -138,6 +223,10 @@ variable "bigquery_connector_s3_path" {
   default     = ""
 }
 
+variable "log_retention_days" {
+  description = "CloudWatch log retention in days"
+  type        = number
+  default     = 30
 variable "bigquery_source_table" {
   description = "Source table name in BigQuery (format: project.dataset.table)"
   type        = string
